@@ -6,7 +6,8 @@ def query_movies_by_review_comment(keyword):
     table = dynamodb.Table('Movies')
 
     response = table.scan(
-        FilterExpression=Attr('details.reviews').contains(keyword)
+        FilterExpression=Attr('details.reviews[0].comment').contains(keyword) | 
+        Attr('details.reviews[1].comment').contains(keyword)
     )
     return response['Items']
 
