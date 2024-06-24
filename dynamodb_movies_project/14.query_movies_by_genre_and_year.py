@@ -7,7 +7,8 @@ def query_movies_by_genre_and_year(genre, year):
 
     response = table.query(
         IndexName='GenreIndex',
-        KeyConditionExpression=Key('genre').eq(genre) & Key('release_year').gt(year)
+        KeyConditionExpression=Key('genre').eq(genre),
+        FilterExpression=Key('release_year').gt(year)
     )
     return response['Items']
 
