@@ -10,7 +10,10 @@ def increment_movie_duration(movie_id, release_year, increment):
             'movie_id': movie_id,
             'release_year': release_year
         },
-        UpdateExpression="set details.duration = details.duration + :inc",
+        UpdateExpression="set details.#D = details.#D + :inc",
+        ExpressionAttributeNames= {
+        	'#D': 'duration'
+        },
         ExpressionAttributeValues={
             ':inc': Decimal(str(increment))
         },
